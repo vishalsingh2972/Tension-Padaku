@@ -1,0 +1,13 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+chroma_db/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+interview_guide.html
+Health_Chatbot_Interview_Preparation_Guide.pdf

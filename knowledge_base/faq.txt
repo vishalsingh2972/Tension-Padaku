@@ -1,0 +1,84 @@
+GOVERNMENT GENERAL HOSPITAL, KURNOOL
+FREQUENTLY ASKED QUESTIONS
+
+Q: What is the name of the hospital?
+A: Government General Hospital, Kurnool.
+
+Q: What is the common name of the hospital?
+A: The hospital is commonly referred to as Pedda Hospital, Kurnool.
+
+Q: Where is the hospital located?
+A: The hospital is located on Budhwarpet Road,
+Kurnool, Andhra Pradesh - 518002, India.
+
+Q: Is this a government hospital?
+A: Government General Hospital, Kurnool is a
+government general hospital.
+
+Q: Is emergency medical service available?
+A: Emergency medical services are mentioned in
+the available hospital records.
+
+Q: Is laboratory service available?
+A: Laboratory services are mentioned in the
+available hospital records.
+
+Q: Is ECG service available?
+A: ECG services are mentioned in the
+available hospital records.
+
+Q: Is pharmacy service available?
+A: Pharmacy-related services are mentioned in
+the available hospital records.
+
+Q: Is physiotherapy available?
+A: Physiotherapy services are mentioned in the
+available hospital records.
+
+Q: Which room is General Medicine?
+A: General Medicine is in Room 12.
+
+Q: Which room is Cardiology?
+A: Cardiology is in Room 25.
+
+Q: Which room is ENT?
+A: ENT is in Room 18.
+
+Q: Which room is Orthopaedics?
+A: Orthopaedics is in Room 30.
+
+Q: Which room is Laboratory?
+A: Laboratory is in Room 45.
+
+Q: Which room is ECG?
+A: ECG is in Room 46.
+
+Q: Which room is Pharmacy?
+A: Pharmacy is in Room 50.
+
+Q: Which room is Emergency?
+A: Emergency is in Room 5.
+
+Q: What are the hospital OPD timings?
+A: Verified OPD timings are not available
+in the current knowledge base.
+
+Q: Which doctors work at the hospital?
+A: Specific doctor information is not available
+in the current knowledge base.
+
+Q: How can I get emergency help?
+A: For a life-threatening emergency, seek immediate
+professional medical care. The Kurnool district
+government information provides 108 emergency
+ambulance services.
+
+IMPORTANT:
+The room information in this project was supplied
+as project data and should be used for hospital
+navigation questions.
+
+The chatbot must not invent information that is not
+present in the knowledge base.
+
+The chatbot must not diagnose diseases.

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Prediction & Hospital Navigation - GGH Kurnool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+
+            <!-- LOGO -->
+            <div class="logo">
+                <div class="logo-icon">🏥</div>
+                <div>
+                    <span>GGH Kurnool</span>
+                    <small class="logo-sub">Pedda Hospital</small>
+                </div>
+            </div>
+
+            <!-- MENU -->
+            <div class="menu">
+                <div class="menu-item active" onclick="closeAllModals()">
+                    <span>🤖</span>
+                    <span data-i18n="assistant">AI Assistant</span>
+                </div>
+
+                <div class="menu-item" onclick="openSymptomModal()">
+                    <span>🩺</span>
+                    <span data-i18n="symptom_checker">Symptom Checker</span>
+                </div>
+
+                <div class="menu-item" onclick="openMapModal()">
+                    <span>🗺️</span>
+                    <span data-i18n="floor_map">Floor Map</span>
+                </div>
+
+                <div class="menu-item" onclick="openDeptModal()">
+                    <span>🏥</span>
+                    <span data-i18n="departments">Departments</span>
+                </div>
+
+                <div class="menu-item" onclick="openPharmacyModal()">
+                    <span>💊</span>
+                    <span data-i18n="medicines">Pharmacy (Room 50)</span>
+                </div>
+
+                <div class="menu-item" onclick="openAppointmentsModal()">
+                    <span>📅</span>
+                    <span data-i18n="appointments">OPD Registration</span>
+                </div>
+
+                <div class="menu-item emergency-menu-item" onclick="openEmergencyModal()">
+                    <span>🚨</span>
+                    <span data-i18n="emergency">Emergency SOS</span>
+                </div>
+            </div>
+
+            <!-- SIDEBAR BOTTOM -->
+            <div class="sidebar-bottom">
+                <div class="menu-item" id="clearChatBtn" title="Clear conversation">
+                    <span>🗑️</span>
+                    <span data-i18n="clear_chat">Clear Chat</span>
+                </div>
+
+                <div class="profile" onclick="openDeptModal()">
+                    <div class="profile-image">🏥</div>
+                    <div>
+                        <strong>GGH Help Desk</strong>
+                        <small>Budhwarpet Road, Kurnool</small>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN AREA ================= -->
+        <main class="main">
+
+            <!-- ================= TOP BAR ================= -->
+            <header class="topbar">
+
+                <!-- EMERGENCY SOS BUTTON -->
+                <button class="sos-btn" onclick="openEmergencyModal()" title="Emergency Help">
+                    <span class="sos-pulse"></span>
+                    🚨 Emergency SOS (108)
+                </button>
+
+                <!-- QUICK ACTIONS -->
+                <div class="top-nav-shortcuts">
+                    <button class="shortcut-btn" onclick="openSymptomModal()">
+                        🩺 Symptom Risk Checker
+                    </button>
+                    <button class="shortcut-btn" onclick="openMapModal()">
+                        🗺️ Floor Map
+                    </button>
+                </div>
+
+                <!-- TOP ACTIONS -->
+                <div class="top-actions">
+
+                    <!-- LANGUAGE SELECTOR -->
+                    <div class="lang-selector-box">
+                        <span class="lang-icon">🌐</span>
+                        <select id="languageSelect" onchange="changeLanguage(this.value)">
+                            <option value="en">English</option>
+                            <option value="te">తెలుగు (Telugu)</option>
+                            <option value="hi">हिंदी (Hindi)</option>
+                        </select>
+                    </div>
+
+                    <!-- REFRESH -->
+                    <button class="refresh-btn" title="Refresh conversation" onclick="location.reload()">
+                        ↻
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================= CHAT AREA ================= -->
+            <section class="chat-area">
+
+                <!-- WELCOME HEADER -->
+                <div class="welcome">
+                    <div class="welcome-badge">🏥 Government General Hospital, Kurnool</div>
+                    <h1 data-i18n="main_title">Health Prediction & Hospital Assistant</h1>
+                    <p data-i18n="main_subtitle">Intelligent Patient Navigation & Symptom Assessment</p>
+                </div>
+
+                <!-- ================= SUGGESTIONS ================= -->
+                <div class="suggestions">
+
+                    <div class="suggestion-card" onclick="useSuggestion('I have a cold and fever, which room should I go?')">
+                        <div class="card-text">
+                            <h3 data-i18n="card1_title">Cold, Fever & Flu</h3>
+                            <p data-i18n="card1_desc">Find initial consultation rooms for general cold, cough or fever.</p>
+                        </div>
+                        <span class="card-icon">🩺</span>
+                    </div>
+
+                    <div class="suggestion-card" onclick="useSuggestion('Where is the pharmacy and what is the room number?')">
+                        <div class="card-text">
+                            <h3 data-i18n="card2_title">Medicine & Pharmacy</h3>
+                            <p data-i18n="card2_desc">Locate Room 50 Pharmacy, dispensing guidance and precautions.</p>
+                        </div>
+                        <span class="card-icon">💊</span>
+                    </div>
+
+                    <div class="suggestion-card" onclick="useSuggestion('Which room is Cardiology and where is ECG done?')">
+                        <div class="card-text">
+                            <h3 data-i18n="card3_title">Heart & Chest Care</h3>
+                            <p data-i18n="card3_desc">Cardiology (Room 25), ECG (Room 46), and heart evaluation.</p>
+                        </div>
+                        <span class="card-icon">❤️</span>
+                    </div>
+
+                    <div class="suggestion-card" onclick="useSuggestion('List all hospital rooms and departments')">
+                        <div class="card-text">
+                            <h3 data-i18n="card4_title">Hospital Directory</h3>
+                            <p data-i18n="card4_desc">View all 8 verified department room numbers and contacts.</p>
+                        </div>
+                        <span class="card-icon">📋</span>
+                    </div>
+
+                </div>
+
+                <!-- ================= CHAT MESSAGES ================= -->
+                <div class="chat-messages" id="chatMessages">
+
+                    <div class="bot-message welcome-message">
+                        <div class="bot-avatar">🤖</div>
+                        <div class="message-content">
+                            <div class="msg-header">
+                                <strong>GGH Health Assistant</strong>
+                                <span class="verified-tag">✓ Hospital Verified</span>
+                            </div>
+                            <div class="bot-text">
+                                <p data-i18n="welcome_text">
+                                    Namaste! Welcome to **Government General Hospital (Pedda Hospital), Kurnool**.
+                                    I am your Healthcare Information & Navigation Assistant.
+                                    How can I guide you today?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================= INPUT AREA ================= -->
+                <div class="input-container">
+
+                    <!-- VOICE LISTENING INDICATOR -->
+                    <div id="voiceIndicator" class="voice-indicator hidden">
+                        <span class="pulse-ring"></span>
+                        <span class="mic-status-text">🎙️ Listening... Speak your symptoms now</span>
+                    </div>
+
+                    <div class="input-box">
+
+                        <input type="text" id="userInput" placeholder="Ask about symptoms, departments, room numbers..." autocomplete="off" onkeydown="handleEnter(event)">
+
+                        <div class="input-actions">
+
+                            <!-- VOICE INPUT BUTTON -->
+                            <button type="button" id="micBtn" class="mic-button" onclick="toggleVoiceInput()" title="Speak your question">
+                                🎤
+                            </button>
+
+                            <!-- SEND BUTTON -->
+                            <button type="button" class="send-button" onclick="sendMessage()" title="Send Message">
+                                ➤
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <p class="disclaimer">
+                        ⚠️ Hospital guidance is educational and does not replace medical diagnosis. For life-threatening emergencies, proceed to **Emergency Room 5** or call **108**.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 1: HEALTH PREDICTION SYMPTOM CHECKER -->
+    <!-- ========================================== -->
+    <div id="symptomModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">🩺</span>
+                    <div>
+                        <h2>Symptom Assessment & Risk Triage</h2>
+                        <small>Preliminary evaluation and designated hospital department routing</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('symptomModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- STEP 1: SYMPTOMS -->
+                <div class="form-section">
+                    <label class="form-label">1. Select your primary symptoms (Choose all that apply):</label>
+                    <div class="symptom-chips">
+                        <label class="chip"><input type="checkbox" name="sym" value="Cold & Cough"> Cold & Cough</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Fever"> Fever / Temperature</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Severe Headache"> Severe Headache</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Chest Pain / Pressure"> Chest Pain / Pressure</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Difficulty Breathing"> Difficulty Breathing</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Ear / Nose / Throat Pain"> Ear / Nose / Throat Pain</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Bone / Joint Pain"> Bone / Joint Pain</label>
+                        <label class="chip"><input type="checkbox" name="sym" value="Dizziness / Weakness"> Dizziness / Weakness</label>
+                    </div>
+                </div>
+
+                <!-- STEP 2: DURATION & SEVERITY -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">2. How long have you had symptoms?</label>
+                        <select id="symDuration" class="form-select">
+                            <option value="Less than 24 hours">Less than 24 hours</option>
+                            <option value="1-3 days" selected>1 to 3 days</option>
+                            <option value="4-7 days">4 to 7 days</option>
+                            <option value="> 1 week">More than 1 week</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">3. Severity level:</label>
+                        <select id="symSeverity" class="form-select">
+                            <option value="mild">Mild (Manageable daily activity)</option>
+                            <option value="moderate" selected>Moderate (Discomfort / Rest needed)</option>
+                            <option value="severe">Severe (Intense pain / Rapid worsening)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="action-btn-primary" onclick="runSymptomCheck()">
+                    🔍 Assess Risk & Find Department
+                </button>
+
+                <!-- RESULTS CONTAINER -->
+                <div id="symptomResult" class="symptom-result hidden">
+                    <div class="result-badge-bar">
+                        <span id="riskBadge" class="risk-badge">Assessing...</span>
+                        <span id="destRoom" class="room-highlight-badge">Room --</span>
+                    </div>
+
+                    <h3 id="destDept">Recommended Department</h3>
+                    <p id="destGuidance" class="dest-guidance"></p>
+
+                    <div class="result-actions">
+                        <button class="btn-outline" onclick="printOPDSlipFromSymptom()">🖨️ Print Patient Slip</button>
+                        <button class="btn-primary-small" onclick="askSymptomInChat()">💬 Ask Bot Details</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 2: INTERACTIVE HOSPITAL FLOOR MAP   -->
+    <!-- ========================================== -->
+    <div id="mapModal" class="modal-backdrop hidden">
+        <div class="modal-card modal-large">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">🗺️</span>
+                    <div>
+                        <h2>GGH Kurnool - Hospital Floor Plan</h2>
+                        <small>Outpatient Department (OPD) & Emergency Navigation</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('mapModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- FLOOR TABS -->
+                <div class="floor-tabs">
+                    <button class="floor-tab active" onclick="switchFloor('all')">All Buildings</button>
+                    <button class="floor-tab" onclick="switchFloor('ground')">Ground Floor</button>
+                    <button class="floor-tab" onclick="switchFloor('first')">First Floor</button>
+                    <button class="floor-tab" onclick="switchFloor('second')">Second Floor</button>
+                </div>
+
+                <!-- MAP VISUALIZER -->
+                <div class="hospital-map-container">
+
+                    <!-- GROUND FLOOR -->
+                    <div class="floor-block" id="floorGround">
+                        <div class="floor-label">GROUND FLOOR (Entrance & Critical Care)</div>
+                        <div class="room-grid">
+                            <div class="room-card emergency-card" id="roomCard5" onclick="selectRoom(5, 'Emergency', 'Ground Floor, East Wing')">
+                                <span class="room-num">Room 5</span>
+                                <strong>🚨 Emergency & Trauma</strong>
+                                <small>24/7 Urgent Care</small>
+                            </div>
+
+                            <div class="room-card" id="roomCard50" onclick="selectRoom(50, 'Pharmacy', 'Ground Floor, Central Corridor')">
+                                <span class="room-num">Room 50</span>
+                                <strong>💊 Central Pharmacy</strong>
+                                <small>Medicine Dispensing</small>
+                            </div>
+
+                            <div class="room-card" id="roomCard45" onclick="selectRoom(45, 'Laboratory', 'Ground Floor, West Wing')">
+                                <span class="room-num">Room 45</span>
+                                <strong>🧪 Diagnostic Laboratory</strong>
+                                <small>Blood & Sample Tests</small>
+                            </div>
+
+                            <div class="room-card reception-card">
+                                <span class="room-num">Counter</span>
+                                <strong>📋 OPD Registration</strong>
+                                <small>Patient Tokens & Slips</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FIRST FLOOR -->
+                    <div class="floor-block" id="floorFirst">
+                        <div class="floor-label">FIRST FLOOR (Specialty & Outpatient Clinics)</div>
+                        <div class="room-grid">
+                            <div class="room-card" id="roomCard12" onclick="selectRoom(12, 'General Medicine', 'First Floor, Wing A')">
+                                <span class="room-num">Room 12</span>
+                                <strong>🩺 General Medicine</strong>
+                                <small>Fever, Cold, Headaches, General</small>
+                            </div>
+
+                            <div class="room-card" id="roomCard18" onclick="selectRoom(18, 'ENT Department', 'First Floor, Wing B')">
+                                <span class="room-num">Room 18</span>
+                                <strong>👂 ENT (Ear, Nose, Throat)</strong>
+                                <small>Throat Pain, Ear, Sinus</small>
+                            </div>
+
+                            <div class="room-card" id="roomCard25" onclick="selectRoom(25, 'Cardiology', 'First Floor, Wing C')">
+                                <span class="room-num">Room 25</span>
+                                <strong>❤️ Cardiology</strong>
+                                <small>Heart & Blood Pressure</small>
+                            </div>
+
+                            <div class="room-card" id="roomCard46" onclick="selectRoom(46, 'ECG Room', 'First Floor, Adjacent to Cardio')">
+                                <span class="room-num">Room 46</span>
+                                <strong>📈 ECG Testing</strong>
+                                <small>Heart Rhythm Tracing</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECOND FLOOR -->
+                    <div class="floor-block" id="floorSecond">
+                        <div class="floor-label">SECOND FLOOR (Surgical & Bone Care)</div>
+                        <div class="room-grid">
+                            <div class="room-card" id="roomCard30" onclick="selectRoom(30, 'Orthopaedics', 'Second Floor, Ortho Block')">
+                                <span class="room-num">Room 30</span>
+                                <strong>🦴 Orthopaedics</strong>
+                                <small>Bones, Joints, Fractures, Spine</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SELECTED ROOM DETAILS -->
+                <div id="mapSelectionInfo" class="map-info-box">
+                    <strong>Select any room above</strong> to view walking instructions, floor level, and department details.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 3: EMERGENCY SOS MODAL               -->
+    <!-- ========================================== -->
+    <div id="emergencyModal" class="modal-backdrop hidden">
+        <div class="modal-card emergency-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">🚨</span>
+                    <div>
+                        <h2>Emergency Medical Assistance</h2>
+                        <small>Government General Hospital, Kurnool</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('emergencyModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="sos-banner">
+                    <h3>IMMEDIATE LIFE-SAVING CONTACTS</h3>
+                    <div class="emergency-contact-grid">
+                        <a href="tel:108" class="emergency-call-btn ambulance-call">
+                            <span class="call-icon">🚑</span>
+                            <div>
+                                <strong>DIAL 108</strong>
+                                <small>Emergency Ambulance (24/7 Free)</small>
+                            </div>
+                        </a>
+
+                        <a href="tel:08518279030" class="emergency-call-btn hospital-call">
+                            <span class="call-icon">📞</span>
+                            <div>
+                                <strong>08518-279030</strong>
+                                <small>GGH Kurnool Superintendent Desk</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="emergency-location-card">
+                    <span class="em-badge">ON-SITE LOCATION</span>
+                    <h3>Proceed Directly to: <strong>ROOM 5 (EMERGENCY & TRAUMA)</strong></h3>
+                    <p>Ground Floor, East Wing. Open 24 Hours, 7 Days a week with dedicated casualty medical officers.</p>
+                </div>
+
+                <div class="first-aid-box">
+                    <h4>Critical Warning Symptoms:</h4>
+                    <ul>
+                        <li><strong>Severe Chest Pressure or Pain</strong> radiating to arm or jaw</li>
+                        <li><strong>Sudden Breathing Difficulty</strong> or severe choking</li>
+                        <li><strong>Loss of Consciousness</strong>, sudden numbness, or facial drooping (Stroke)</li>
+                        <li><strong>Uncontrolled Bleeding</strong> or severe physical trauma</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 4: DEPARTMENTS DIRECTORY            -->
+    <!-- ========================================== -->
+    <div id="deptModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">🏥</span>
+                    <div>
+                        <h2>Hospital Departments & Rooms</h2>
+                        <small>GGH Kurnool Official Room Directory</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('deptModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="dept-search-wrapper">
+                    <input type="text" id="deptSearchInput" placeholder="Filter departments or symptoms..." oninput="filterDepartments(this.value)">
+                </div>
+
+                <div class="dept-grid-list" id="deptGridList">
+                    <div class="dept-item" onclick="askAboutRoom('General Medicine', 12)">
+                        <div class="dept-badge">Room 12</div>
+                        <div>
+                            <strong>General Medicine</strong>
+                            <p>Cold, fever, headaches, systemic viral illness, initial consultations.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('Cardiology', 25)">
+                        <div class="dept-badge">Room 25</div>
+                        <div>
+                            <strong>Cardiology</strong>
+                            <p>Heart diseases, hypertension, chest symptoms, cardiac monitoring.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('ENT', 18)">
+                        <div class="dept-badge">Room 18</div>
+                        <div>
+                            <strong>ENT (Ear, Nose & Throat)</strong>
+                            <p>Throat pain, sinus infection, ear disorders, voice problems.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('Orthopaedics', 30)">
+                        <div class="dept-badge">Room 30</div>
+                        <div>
+                            <strong>Orthopaedics</strong>
+                            <p>Bones, joint issues, fractures, spinal problems, musculoskeletal pain.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('Emergency', 5)">
+                        <div class="dept-badge badge-red">Room 5</div>
+                        <div>
+                            <strong>Emergency & Trauma</strong>
+                            <p>24/7 Life-threatening emergencies, trauma, severe acute symptoms.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('Laboratory', 45)">
+                        <div class="dept-badge">Room 45</div>
+                        <div>
+                            <strong>Diagnostic Laboratory</strong>
+                            <p>Blood testing, urine analysis, pathology investigations.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('ECG', 46)">
+                        <div class="dept-badge">Room 46</div>
+                        <div>
+                            <strong>ECG Room</strong>
+                            <p>Electrocardiography, heart rhythm diagnostics.</p>
+                        </div>
+                    </div>
+
+                    <div class="dept-item" onclick="askAboutRoom('Pharmacy', 50)">
+                        <div class="dept-badge">Room 50</div>
+                        <div>
+                            <strong>Hospital Pharmacy</strong>
+                            <p>Prescription medicine dispensing, government supply.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 5: PHARMACY & MEDICINES              -->
+    <!-- ========================================== -->
+    <div id="pharmacyModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">💊</span>
+                    <div>
+                        <h2>Hospital Pharmacy & Medicine Guidance</h2>
+                        <small>Room 50, Ground Floor</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('pharmacyModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="info-card-block">
+                    <h3>Pharmacy Location: <strong>Room 50 (Ground Floor)</strong></h3>
+                    <p>Free and subsidized government generic medicines are dispensed at Room 50 for registered outpatients and inpatients.</p>
+                </div>
+
+                <div class="guidance-checklist">
+                    <h4>Important Pharmacy Guidelines:</h4>
+                    <ul>
+                        <li>✓ <strong>Valid Doctor Prescription:</strong> Always carry your stamped GGH Kurnool doctor slip.</li>
+                        <li>✓ <strong>Dosage Instructions:</strong> Verify medicine names, dosage times, and precautions with the pharmacist before leaving the counter.</li>
+                        <li>✓ <strong>Emergency Medicines:</strong> Available 24/7 through the casualty counter in Room 5.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 6: APPOINTMENTS & OPD REGISTRATION   -->
+    <!-- ========================================== -->
+    <div id="appointmentsModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">📅</span>
+                    <div>
+                        <h2>OPD Registration & Token Process</h2>
+                        <small>How to consult doctors at GGH Kurnool</small>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('appointmentsModal')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="opd-steps">
+                    <div class="step-card">
+                        <span class="step-num">1</span>
+                        <div>
+                            <strong>Arrival & Registration Counter</strong>
+                            <p>Visit the Main Entrance Ground Floor registration counter to generate your OPD consultation token.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">2</span>
+                        <div>
+                            <strong>Aarogyasri / Ayushman Bharat Desk</strong>
+                            <p>Patients with government health cards can authenticate their cards at the dedicated help desk.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">3</span>
+                        <div>
+                            <strong>Proceed to Assigned Room</strong>
+                            <p>Take your token slip directly to the department room (e.g. Room 12 for General Medicine or Room 25 for Cardiology).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- HIDDEN PRINTABLE PATIENT NAVIGATION SLIP  -->
+    <!-- ========================================== -->
+    <div id="printableSlip" class="printable-slip hidden">
+        <div class="slip-header">
+            <h2>GOVERNMENT GENERAL HOSPITAL</h2>
+            <h3>PEDDA HOSPITAL, KURNOOL</h3>
+            <p>Budhwarpet Road, Kurnool, AP - 518002 | Helpline: 108</p>
+        </div>
+        <hr>
+        <div class="slip-body">
+            <div class="slip-row">
+                <span>Date & Time:</span>
+                <strong id="slipDate">--</strong>
+            </div>
+            <div class="slip-row">
+                <span>Reported Symptoms:</span>
+                <strong id="slipSymptoms">--</strong>
+            </div>
+            <div class="slip-row">
+                <span>Assessed Department:</span>
+                <strong id="slipDept">--</strong>
+            </div>
+            <div class="slip-room-box">
+                <span>PROCEED TO ROOM:</span>
+                <h1 id="slipRoom">ROOM --</h1>
+            </div>
+            <p class="slip-note">
+                * Please present this slip at the Registration Counter or Room Entrance.
+                This slip is for navigation and queue guidance only.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

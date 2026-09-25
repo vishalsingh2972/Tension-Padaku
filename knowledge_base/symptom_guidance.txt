@@ -1,0 +1,47 @@
+GOVERNMENT GENERAL HOSPITAL, KURNOOL
+SYMPTOM AND DEPARTMENT GUIDANCE
+
+IMPORTANT:
+This information is general guidance for hospital navigation.
+It is not a medical diagnosis.
+
+HEADACHE:
+For a headache, General Medicine may be appropriate
+for an initial medical evaluation.
+
+General Medicine:
+Room 12
+
+CHEST-RELATED SYMPTOMS:
+For chest-related symptoms, Cardiology may be relevant
+for medical evaluation.
+
+Cardiology:
+Room 25
+
+EAR, NOSE OR THROAT PROBLEMS:
+For ear, nose, or throat-related problems, ENT may be
+relevant.
+
+ENT:
+Room 18
+
+BONE OR JOINT PROBLEMS:
+For bone, joint, or musculoskeletal problems,
+Orthopaedics may be relevant.
+
+Orthopaedics:
+Room 30
+
+EMERGENCY:
+For potentially life-threatening or rapidly worsening
+symptoms, seek immediate emergency medical care.
+
+Emergency:
+Room 5
+
+IMPORTANT:
+The chatbot must not diagnose a disease.
+The chatbot must not claim that a symptom definitely
+means a particular disease.
+The chatbot should provide navigation guidance only.

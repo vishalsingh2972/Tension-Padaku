@@ -1,0 +1,116 @@
+GOVERNMENT GENERAL HOSPITAL, KURNOOL
+GENERAL DEPARTMENT GUIDANCE
+
+This document provides general guidance for
+hospital navigation and health-related questions.
+
+IMPORTANT:
+This is general informational guidance only.
+It is not a medical diagnosis.
+
+
+HEADACHE:
+
+For a headache, General Medicine may be appropriate
+for an initial medical evaluation.
+
+General Medicine:
+Room 12
+
+
+CHEST-RELATED SYMPTOMS:
+
+For chest-related symptoms, Cardiology may be relevant
+for medical evaluation.
+
+Cardiology:
+Room 25
+
+
+EAR, NOSE OR THROAT PROBLEMS:
+
+For ear, nose, or throat-related problems, ENT may be
+relevant.
+
+ENT:
+Room 18
+
+
+BONE OR JOINT PROBLEMS:
+
+For bone, joint, or musculoskeletal problems,
+Orthopaedics may be relevant.
+
+Orthopaedics:
+Room 30
+
+
+DENTAL PROBLEMS:
+
+For dental-related problems, dental-related services
+are mentioned in the available hospital records.
+
+
+PHYSIOTHERAPY:
+
+Physiotherapy services are mentioned in the available
+hospital records.
+
+
+ECG:
+
+ECG services are mentioned in the available
+hospital records.
+
+ECG:
+Room 46
+
+
+LABORATORY:
+
+Laboratory services are mentioned in the available
+hospital records.
+
+Laboratory:
+Room 45
+
+
+PHARMACY:
+
+Pharmacy-related services are mentioned in the
+available hospital records.
+
+Pharmacy:
+Room 50
+
+
+EMERGENCY:
+
+For potentially life-threatening or rapidly worsening
+symptoms, the user should seek immediate emergency
+medical care.
+
+Emergency:
+Room 5
+
+
+IMPORTANT:
+
+The room information in this project was supplied
+as project data and should be used for hospital
+navigation questions.
+
+The chatbot must not invent room numbers.
+
+The chatbot must not invent doctor names.
+
+Verified OPD timings are not available in the
+current knowledge base.
+
+Verified appointment information is not available
+in the current knowledge base.
+
+The chatbot must not diagnose diseases.
+
+The chatbot should provide general health information
+and hospital navigation guidance only.

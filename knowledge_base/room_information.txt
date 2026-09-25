@@ -1,0 +1,21 @@
+GOVERNMENT GENERAL HOSPITAL, KURNOOL
+ROOM INFORMATION
+
+General Medicine - Room 12
+Cardiology - Room 25
+ENT - Room 18
+Orthopaedics - Room 30
+Laboratory - Room 45
+ECG - Room 46
+Pharmacy - Room 50
+Emergency - Room 5
+
+IMPORTANT:
+The room numbers above were supplied for this project
+and should be treated as project-provided information.
+
+The chatbot must use these room numbers when answering
+hospital navigation questions.
+
+If a department or room is not listed here, the chatbot
+must not invent a room number.

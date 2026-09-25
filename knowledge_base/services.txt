@@ -1,0 +1,77 @@
+GOVERNMENT GENERAL HOSPITAL, KURNOOL
+SERVICES
+
+Hospital:
+Government General Hospital, Kurnool
+
+Location:
+Budhwarpet Road, Kurnool, Andhra Pradesh - 518002.
+
+Verified service information:
+
+1. Emergency Medical Services
+Government records associated with Government General
+Hospital, Kurnool mention emergency medical services.
+
+2. Laboratory Services
+Laboratory-related services are associated with the
+hospital in government records.
+
+3. Pharmacy Services
+Pharmacist positions and pharmacy-related services are
+associated with Government General Hospital, Kurnool.
+
+4. ECG Services
+ECG-related services are mentioned in government records
+associated with the hospital.
+
+5. Radiography / Imaging Services
+Radiographer-related services are mentioned in government
+records associated with the hospital.
+
+6. Physiotherapy Services
+Physiotherapy services are mentioned in government records
+associated with the hospital.
+
+7. Operation Theatre Services
+Operation Theatre-related services are mentioned in
+government records associated with the hospital.
+
+8. Anaesthesia Services
+Anaesthesia-related services are mentioned in government
+records associated with the hospital.
+
+9. Dental-related Services
+Dental-related technical services are mentioned in
+government records associated with the hospital.
+
+10. Speech Therapy
+Speech therapist-related services are mentioned in
+government records associated with the hospital.
+
+11. Diagnostic Services
+The Kurnool District Government health information mentions
+NTR Free Diagnostic Centres as a public health service in
+the district.
+
+12. Emergency Ambulance Service
+The Kurnool District Government health information lists
+108 emergency services.
+
+IMPORTANT:
+This file contains service information identified from
+government sources. It should not be treated as a complete
+list of every service currently available at the hospital.
+
+The chatbot must not invent:
+- Service availability
+- Room numbers
+- Doctor names
+- OPD timings
+- Test prices
+- Medicine availability
+- Appointment availability
+
+If reliable information is not available, the chatbot
+should clearly say that the information is unavailable
+and recommend contacting the hospital for confirmation.
