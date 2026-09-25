@@ -11,7 +11,7 @@ if not api_key:
     exit(1)
 
 client = genai.Client(api_key=api_key)
-model_name = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+model_name = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 
 print(f"Testing Gemini connection with model: {model_name}...")
 try:
